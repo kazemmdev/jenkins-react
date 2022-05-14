@@ -11,14 +11,14 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./:/var/www
+      - ./build:/usr/share/nginx/html
       - .docker/nginx:/etc/nginx/conf.d
     networks:
       app-network:
   
   app:
     build:
-      context: .docker/node
+      context: .
       dockerfile: dockerfile
     container_name: app
     tty: true
