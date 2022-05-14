@@ -1,0 +1,26 @@
+version: '3.8'
+
+networks:
+  app-network:
+
+services:
+  webserver:
+    image: nginx:1.21.6-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - .docker/nginx:/etc/nginx/conf.d
+    networks:
+      app-network:
+  
+  app:
+    build:
+      context: .docker/node
+      dockerfile: dockerfile
+    container_name: app
+    tty: true
+    networks:
+      - app-network
