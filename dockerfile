@@ -10,4 +10,6 @@ WORKDIR /app
 
 COPY --chown=${USER}:${USER} . .
 
+RUN npm install
+
 RUN npm run build
